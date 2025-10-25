@@ -1,20 +1,19 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Audio } from 'expo-av';
+import * as Location from 'expo-location';
+import { router } from 'expo-router';
+import * as SMS from 'expo-sms';
+import { addDoc, collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Linking,
-  AppState,
+    Alert,
+    AppState,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
-import * as SMS from 'expo-sms';
-import * as Location from 'expo-location';
-import { Audio } from 'expo-av';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import { router } from 'expo-router';
 
 let tapCount = 0;
 let tapTimer: ReturnType<typeof setTimeout>;

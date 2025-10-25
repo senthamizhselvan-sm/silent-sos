@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import * as SMS from 'expo-sms';
-import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
+import * as Location from 'expo-location';
+import * as SMS from 'expo-sms';
+import { useEffect, useState } from 'react';
+import {
+    Alert,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity
+} from 'react-native';
 
 export default function FireEmergencyScreen() {
   const [sirenSound, setSirenSound] = useState<Audio.Sound | null>(null);

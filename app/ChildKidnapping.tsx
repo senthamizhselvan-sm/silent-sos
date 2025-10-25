@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  Linking,
-  TouchableOpacity,
-} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Audio } from 'expo-av';
 import * as Location from 'expo-location';
 import * as SMS from 'expo-sms';
-import { Audio } from 'expo-av';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { collection, addDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import {
+    Alert,
+    Linking,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import { db } from '../firebaseConfig';
 
 export default function ChildKidnappingScreen() {

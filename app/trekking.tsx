@@ -1,26 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
+import { Audio } from 'expo-av';
+import * as Location from 'expo-location';
+import { Magnetometer } from 'expo-sensors';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   Alert,
+  Linking,
+  Modal,
+  Platform,
   ScrollView,
+  Share,
+  StyleSheet,
+  Text,
+  TextInput,
   TouchableOpacity,
   Vibration,
-  Share,
-  Linking,
-  Platform,
-  TextInput,
-  Modal,
-  Image,
+  View
 } from 'react-native';
-import * as Location from 'expo-location';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Audio } from 'expo-av';
-import { Magnetometer } from 'expo-sensors';
-import NetInfo from '@react-native-community/netinfo';
-import { MaterialIcons, FontAwesome, Entypo } from '@expo/vector-icons';
-import MapView, { Marker } from 'react-native-maps';
+
+let MapView: React.ComponentType<any> = () => <View />;
+let Marker: React.ComponentType<any> = () => null;
+
+if (Platform.OS !== 'web') {
+  try {
+     
+    const maps = require('react-native-maps');
+    MapView = maps.default;
+    Marker = maps.Marker;
+  } catch {
+    // Maps not available
+  }
+}
 
 const STATIONARY_THRESHOLD_MINUTES = 30;
 
@@ -52,7 +64,7 @@ export default function TrekkingSafetyScreen() {
 const signalLogger = useRef<NodeJS.Timeout | number | null>(null);
 const stationaryTimer = useRef<NodeJS.Timeout | number | null>(null);
   const magnetometerSubscription = useRef<any>(null);
-  const mapRef = useRef<MapView>(null);
+  const mapRef = useRef<any>(null);
 
   // Initialize features
   useEffect(() => {
